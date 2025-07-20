@@ -1,36 +1,60 @@
 {% extends 'usuarios/base.html' %}
 
-{% block aba %}Lançar Notas{% endblock %}
+{% block 'conteudo' %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
 
-{% block titulo %}Lançar Notas{% endblock %}
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h3 class="card-title text-center mb-4">Cadastrar Novo Produto</h3>
 
-{% block conteudo %}
-<h3>Cadastro</h3>
-<p class = "lead">Preencha todas as informações.</p>
-<hr>
-<form action = "{% url 'lancar' %}" method = "POST">
-    {% csrf_token %}
-    <div class = "form-register">
-        <label for = "userName">Nome:</label>
-        <label for = "Name" style = "font-weight:bold;">{{ user.first_name }}</label>
+                    {# Este bloco exibe as mensagens de sucesso ou erro enviadas pela view #}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert {{ message.tags }} text-center" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    {# O formulário envia os dados para a URL com nome 'lancar' usando o método POST #}
+                    <form action="{% url 'lancar' %}" method="POST">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label for="nome_produto" class="form-label"><b>Nome do Produto *</b></label>
+                            <input type="text" class="form-control" name="nome_produto" id="nome_produto" placeholder="Ex: Camiseta Branca M" required>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="quantidade" class="form-label"><b>Quantidade *</b></label>
+                                <input type="number" class="form-control" name="quantidade" id="quantidade" placeholder="0" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="preco_custo" class="form-label"><b>Preço de Custo (R$) *</b></label>
+                                <input type="number" class="form-control" step="0.01" name="preco_custo" id="preco_custo" placeholder="Ex: 25.50" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="preco_venda" class="form-label"><b>Preço de Venda (R$) *</b></label>
+                                <input type="number" class="form-control" step="0.01" name="preco_venda" id="preco_venda" placeholder="Ex: 49.90" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="fornecedor" class="form-label">Fornecedor</label>
+                            <input type="text" class="form-control" name="fornecedor" id="fornecedor" placeholder="(Opcional)">
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success mt-3">Salvar Produto</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
     </div>
-    <div class = "form-register">
-        <label for = "disciplinaName">Disciplina:</label>
-        <input type = "text" id = "disciplinaName" name = "disciplina">
-    </div>
-    <div class = "form-register">
-        <label for = "notaAtividades">Nota das atividades:</label>
-        <input type = "text" id = "notaAtividades" name = "nota_atividades">
-    </div>
-    <div class = "form-register">
-        <label for = "notaTrabalho">Nota do trabalho:</label>
-        <input type = "text" id = "notaTrabalho" name = "nota_trabalho">
-    </div>
-    <div class = "form-register">
-        <label for = "notaProva">Nota da prova:</label>
-        <input type = "text" id = "notaProva" name = "nota_prova">
-    </div>
-    <button type = "submit" class = "btn btn-primary">Registrar Notas</button>
-</form>
+</div>
 {% endblock %}
-

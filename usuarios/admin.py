@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Nota
+from .models import Produto  # Corrigido para importar Produto
 
-admin.site.register(Nota)
-
+# Registra o modelo Produto na área de administração
+admin.site.register(Produto)
