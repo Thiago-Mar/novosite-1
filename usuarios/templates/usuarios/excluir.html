@@ -1,16 +1,16 @@
 {% extends 'usuarios/base.html' %}
 
-{% block aba %}Excluir Notas{% endblock %}
+{% block aba %}Excluir Produto{% endblock %}
 
-{% block titulo %}Excluir Notas{% endblock %}
+{% block titulo %}Excluir Produto{% endblock %}
 
 {% block conteudo %}
-<h3>Exclusão da Nota Selecionada</h3>
+<h3>Exclusão do produto selecionado</h3>
 <hr>
-<p>Tem certeza que deseja excluir as notas da disciplina <strong>{{ lista_notas.disciplina }}</strong>?</p>
+<p>Tem certeza que deseja eliminar esse produto<strong>{{ lista_produtos.nome_produto }}</strong>?</p>
 
 <div class = "delete">
-    <a href = "{% url 'excluir' lista_notas.pk %}" class = "btn btn-success btn-sm">Sim</a>
+    <a href = "{% url 'excluir' lista_produtos.pk %}" class = "btn btn-success btn-sm">Sim</a>
     <a href = "{% url 'alterar' %}" class = "btn btn-danger btn-sm">Não</a>
 </div>
 {% endblock %}

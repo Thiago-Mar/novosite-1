@@ -4,75 +4,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-    <title>{% block titulo %}Gestor de Estoque{% endblock %}</title>
+    <link href = "{% static 'css/bootstrap.min.css' %}" rel = "stylesheet">
+    <title>{% block aba %}Gerenciador de estoque{% endblock %}</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#0A2F5B;">
-        <div class="container px-4">
-            <a class="navbar-brand" href="{% url 'home' %}">📦 Gestor de Estoque</a>
+    <!-- Responsive navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark" style = "background-color:#2e20ad;">
+        <div class="container px-5">
+            <a class="navbar-brand" href="{% url 'home' %}">Gestor de estoque</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Página Inicial</a></li>
-                    
-                    <li class="nav-item"><a class="nav-link" href="{% url 'sobre' %}">Sobre</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'contato' %}">Contato</a></li>
-                    
-                    {% if user.is_authenticated %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Olá, {{ user.first_name }}
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{% url 'logout' %}">Sair (Logout)</a></li>
-                        </ul>
-                    </li>
-                    {% endif %}
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'home' %}">Página inicial</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#!">Sobre</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#!">Contato</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-
-    <div class="container px-4 px-lg-5 mt-4">
+    <!-- Page Content-->
+    <div class="container px-4 px-lg-5">
         
-        <div class="card text-white my-5 py-4 text-center" style="background-color: #176087;">
-            <div class="card-body">
-                <h2 class="text-white m-0">{% block cabecalho %}Bem-vindo ao seu Painel de Controle!{% endblock %}</h2>
-            </div>
+        <!-- Call to Action-->
+        <div class="card text-white my-5 py-4 text-center" style = "background-color: #2e20ad;">
+            <div class="card-body"><p class="text-white m-0">{% block titulo %}Esse é o seu sistema de gerenciamento de estoque.{% endblock %}</p></div>
         </div>
-
-        {% block conteudo %}
-            <div class="row gx-4 gx-lg-5 text-center">
-                <div class="col-md-6 mb-5">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h2 class="card-title">Cadastrar Produto</h2>
-                            <p class="card-text">Clique aqui para adicionar um novo item ao seu estoque.</p>
-                        </div>
-                        <div class="card-footer"><a class="btn btn-primary" href="{% url 'lancar' %}">Cadastrar</a></div>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-5">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h2 class="card-title">Visualizar Estoque</h2>
-                            <p class="card-text">Veja, edite ou exclua os produtos do seu inventário.</p>
-                        </div>
-                        <div class="card-footer"><a class="btn btn-primary" href="{% url 'visualizar' %}">Visualizar</a></div>
+        <!-- Content Row-->
+        <div class="row gx-4 gx-lg-5">
+            {% block conteudo %}
+            <div class="col-md-4 mb-5">
+                <div class="card h-100" style = "background-color: #a89d9d;">
+                    <div class="card-body" style = "background-color: #FFFFFF;">
+                        <h2 class="card-title">Cadastrar produtos</h2>
+                        <p class="card-text">Aqui é possível Cadastrar os saldos reerente ao seu PDV.</p>
+                        <a href="{% url 'lancar' %}" class="btn btn-primary">Cadastrar</a>
                     </div>
                 </div>
             </div>
-        {% endblock %}
-    </div>
 
-    <footer class="py-4 mt-auto fixed-bottom" style="background-color: #0A2F5B;">
+            <!--Alterar-->
+             <div class="col-md-4 mb-5">
+                <div class="card h-100" style = "background-color: #a89d9d;">
+                    <div class="card-body" style = "background-color: #FFFFFF;">
+                        <h2 class="card-title">Alterar produtos</h2>
+                        <p class="card-text">Aqui é possível alterar e excluir produtos do seu PDV.</p>
+                        <a href="{% url 'alterar' %}" class="btn btn-primary">Alterar produtos</a>
+                    </div>
+                </div>
+            </div>
+
+            <!--Visualizar-->
+              <div class="col-md-4 mb-5">
+                <div class="card h-100" style = "background-color: #a89d9d;">
+                    <div class="card-body" style = "background-color: #ffffff;">
+                        <h2 class="card-title">Visualizar estoque</h2>
+                        <p class="card-text">Aqui você visualizará todos os produtos do seu PDV.</p>
+                        <a href="{% url 'visualizar' %}" class="btn btn-primary">Visualizar</a>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}   
+        </div>
+    </div>
+    <!-- Footer-->
+   <footer class="mt-5" style="background-color: #5879ab;">
         <div class="container px-4 px-lg-5">
-            <p class="m-0 text-center text-white">Copyright &copy; Gestor de Estoque 2025</p>
+            <p class="m-0 text-center text-white">Copyright &copy; Gerenciador de estoque 2025</p>
         </div>
     </footer>
-
+    <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>    
 </body>
 </html>

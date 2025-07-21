@@ -1,36 +1,36 @@
 {% extends 'usuarios/base.html' %}
 
-{% block aba %}Editar Notas{% endblock %}
+{% block aba %}Editar produtos{% endblock %}
 
-{% block titulo %}Editar Notas{% endblock %}
+{% block titulo %}Editar produtos{% endblock %}
 
 {% block conteudo %}
-<h3>Edição da Nota Selecionada</h3>
-<p class = "lead">Verifique as informações cadastradas e faça as devidas edições.</p>
+<h3>Edição de produtos do estoque</h3>
+<p class = "lead">Verifique as informações e corrija seu estoque.</p>
 <hr>
-<form action = "{% url 'editar' lista_notas.pk %}" method = "POST">
+<form action = "{% url 'editar' lista_produtos.pk %}" method = "POST">
     {% csrf_token %}
-    <div class = "form-register">
-        <label for = "userName">Nome:</label>
-        <label for = "Name" style = "font-weight:bold;">{{ user.first_name }}</label>
+   <div class="form-group">
+            <label for="nome_produto">Nome do Produto *</label>
+            <input type="text" class="form-control" id="nome_produto" name="nome_produto" required>
+        </div>
+        <div class="form-group">
+            <label for="quantidade">Quantidade *</label>
+            <input type="number" class="form-control" id="quantidade" name="quantidade" required>
+        </div>
+        <div class="form-group">
+            <label for="preco_custo">Preço de Custo *</label>
+            <input type="number" step="0.01" class="form-control" id="preco_custo" name="preco_custo" required>
+        </div>
+        <div class="form-group">
+            <label for="preco_venda">Preço de Venda *</label>
+            <input type="number" step="0.01" class="form-control" id="preco_venda" name="preco_venda" required>
+        </div>
+        <div class="form-group">
+            <label for="fornecedor">Fornecedor</label>
+            <input type="text" class="form-control" id="fornecedor" name="fornecedor">
+        </div>
     </div>
-    <div class = "form-register">
-        <label for = "disciplinaName">Disciplina:</label>
-        <input type = "text" id = "disciplinaName" name = "disciplina" value = "{{ lista_notas.disciplina }}">
-    </div>
-    <div class = "form-register">
-        <label for = "notaAtividades">Nota das atividades:</label>
-        <input type = "text" id = "notaAtividades" name = "nota_atividades" value = "{{ lista_notas.nota_atividades }}">
-    </div>
-    <div class = "form-register">
-        <label for = "notaTrabalho">Nota do trabalho:</label>
-        <input type = "text" id = "notaTrabalho" name = "nota_trabalho" value = "{{ lista_notas.nota_trabalho }}">
-    </div>
-    <div class = "form-register">
-        <label for = "notaProva">Nota da prova:</label>
-        <input type = "text" id = "notaProva" name = "nota_prova" value = "{{ lista_notas.nota_prova }}">
-    </div>
-    
     <div class = "update">
         <button type = "submit" class = "btn btn-success btn-sm">Atualizar</button>
         <a href = "{% url 'alterar' %}" class = "btn btn-danger btn-sm">Voltar</a>
